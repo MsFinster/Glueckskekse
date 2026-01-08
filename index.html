@@ -2,76 +2,51 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Dein Glückskeks 🍪</title>
+  <title>🍪 Dein Glückskeks</title>
   <style>
+    /* Grundlayout */
     body {
-      font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #ffeac0);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
       text-align: center;
+      transition: background 0.5s ease;
     }
 
+    /* Glückskeks-Karte */
     .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 20px;
-      max-width: 400px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background: #fff7e6;
+      padding: 2.5rem 2rem;
+      border-radius: 50%;
+      width: 320px;
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
     }
 
     h1 {
+      font-size: 2rem;
       margin-bottom: 1rem;
+      color: #d18b3f;
     }
 
     p {
       font-size: 1.2rem;
-    }
-
-    button {
-      margin-top: 1.5rem;
-      padding: 0.7rem 1.2rem;
-      border: none;
-      border-radius: 999px;
-      font-size: 1rem;
-      cursor: pointer;
-      background: #ffcc70;
-    }
-  </style>
-</head>
-<body>
-
-<div class="card">
-  <h1>🍪 Glückskeks</h1>
-  <p id="spruch"></p>
-  <button onclick="neuerSpruch()">Neuen Spruch</button>
-</div>
-
-<script>
-  const sprueche = [
-    "Manchmal ist der Umweg der schönste Weg.",
-    "Deine Neugier wird dich weiter bringen als jeder Plan.",
-    "Heute ist ein guter Tag, etwas Neues zu beginnen.",
-    "Vertraue dem Prozess – auch wenn du ihn noch nicht verstehst.",
-    "Deine Kreativität ist wertvoller als du denkst.",
-    "Ein kleiner Schritt heute kann morgen alles verändern.",
-    "Du bist näher dran, als es sich gerade anfühlt.",
-    "Das, was dich begeistert, ist kein Zufall.",
-    "Geduld ist auch eine Form von Mut.",
-    "Du darfst deinen eigenen Rhythmus haben."
-  ];
-
-  function neuerSpruch() {
-    const zufall = Math.floor(Math.random() * sprueche.length);
-    document.getElementById("spruch").textContent = sprueche[zufall];
-  }
-
-  // beim Laden direkt einen Spruch anzeigen
-  neuerSpruch();
-</script>
-
-</body>
-</html>
+      line-height: 1.5;
+      color: #6b4c2f;
+      min-height: 3em;
+      padding: 0 1rem;
+      transition: opacity 0.
