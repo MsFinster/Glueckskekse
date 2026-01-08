@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>🍪 Dein Glückskeks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* Grundlayout */
     body {
@@ -20,7 +21,7 @@
     /* Glückskeks-Karte */
     .card {
       background: #fff7e6;
-      padding: 2.5rem 2rem;
+      padding: 2.5rem;
       border-radius: 50%;
       width: 320px;
       height: 320px;
@@ -49,4 +50,76 @@
       color: #6b4c2f;
       min-height: 3em;
       padding: 0 1rem;
-      transition: opacity 0.
+      transition: opacity 0.3s ease;
+    }
+
+    /* Button */
+    button {
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #f7c873;
+      color: #6b4c2f;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background: #ffd68a;
+      transform: translateY(-2px);
+    }
+
+    /* Animation beim Spruchwechsel */
+    .fade {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .fade.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>🍪 Glückskeks</h1>
+  <p id="spruch" class="fade"></p>
+  <button onclick="neuerSpruch()">Neuen Spruch</button>
+</div>
+
+<script>
+  const sprueche = [
+    "Manchmal ist der Umweg der schönste Weg.",
+    "Deine Neugier wird dich weiter bringen als jeder Plan.",
+    "Heute ist ein guter Tag, etwas Neues zu beginnen.",
+    "Vertraue dem Prozess – auch wenn du ihn noch nicht verstehst.",
+    "Deine Kreativität ist wertvoller als du denkst.",
+    "Ein kleiner Schritt heute kann morgen alles verändern.",
+    "Du bist näher dran, als es sich gerade anfühlt.",
+    "Das, was dich begeistert, ist kein Zufall.",
+    "Geduld ist auch eine Form von Mut.",
+    "Du darfst deinen eigenen Rhythmus haben."
+  ];
+
+  function neuerSpruch() {
+    const spruchElem = document.getElementById("spruch");
+    spruchElem.classList.remove("show");
+
+    setTimeout(() => {
+      const zufall = Math.floor(Math.random() * sprueche.length);
+      spruchElem.textContent = sprueche[zufall];
+      spruchElem.classList.add("show");
+    }, 200);
+  }
+
+  // Direkt beim Laden einen Spruch anzeigen
+  neuerSpruch();
+</script>
+
+</body>
+</html>
