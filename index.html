@@ -1,178 +1,102 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍪 Glückskeks</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background: linear-gradient(135deg, #fff4d6, #ffe3a3);
-      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff3d6, #ffe0a3);
     }
 
-    .container {
-      text-align: center;
-    }
-
-    .card {
-      width: 340px;
-      height: 340px;
-      background: #fffaf0;
+    .box {
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
+      background: #fffaf0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.03);
+      text-align: center;
+      padding: 20px;
     }
 
     h1 {
-      color: #d18b3f;
-      margin-bottom: 1rem;
-      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #c07a2c;
     }
 
     #spruch {
-      color: #6b4c2f;
-      font-size: 1.15rem;
-      line-height: 1.6;
-      min-height: 110px;
+      font-size: 1.1rem;
+      color: #5a3d20;
+      min-height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      padding: 0 10px;
-    }
-
-    #spruch.show {
-      opacity: 1;
+      padding: 10px;
     }
 
     button {
-      margin-top: 1.5rem;
-      padding: 0.9rem 1.7rem;
+      margin-top: 10px;
+      padding: 10px 20px;
       border: none;
-      border-radius: 999px;
+      border-radius: 20px;
       background: #f7c873;
-      color: #6b4c2f;
-      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     button:hover {
-      background: #ffd98f;
-      transform: translateY(-2px);
-    }
-
-    button:active {
-      transform: scale(0.97);
-    }
-
-    @media (max-width: 450px) {
-      .card {
-        width: 90vw;
-        height: 90vw;
-      }
-
-      h1 {
-        font-size: 1.7rem;
-      }
-
-      #spruch {
-        font-size: 1rem;
-      }
+      background: #ffd98a;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="card">
-      <h1>🍪 Glückskeks</h1>
-
-      <p id="spruch"></p>
-
-      <button id="button">
-        Neuer Spruch
-      </button>
-    </div>
+  <div class="box">
+    <h1>🍪 Glückskeks</h1>
+    <div id="spruch">Klicke auf den Button!</div>
+    <button onclick="neuerSpruch()">Neuer Spruch</button>
   </div>
 
   <script>
     const sprueche = [
-      "Manchmal ist der Umweg der schönste Weg.",
-      "Deine Neugier wird dich weiter bringen als jeder Plan.",
-      "Heute ist ein guter Tag, etwas Neues zu beginnen.",
-      "Vertraue dem Prozess – auch wenn du ihn noch nicht verstehst.",
-      "Deine Kreativität ist wertvoller als du denkst.",
-      "Ein kleiner Schritt heute kann morgen alles verändern.",
-      "Du bist näher dran, als es sich gerade anfühlt.",
+      "Manchmal ist der Umweg der beste Weg.",
+      "Deine Neugier bringt dich weiter als jeder Plan.",
+      "Heute ist ein guter Tag für etwas Neues.",
+      "Vertraue dem Prozess.",
+      "Du bist stärker als du denkst.",
+      "Ein kleiner Schritt verändert alles.",
+      "Du bist näher dran als du glaubst.",
       "Das, was dich begeistert, ist kein Zufall.",
-      "Geduld ist auch eine Form von Mut.",
-      "Du darfst deinen eigenen Rhythmus haben.",
-      "Lebe deine Träume weiter.",
-      "Mach das, was du machen willst und nicht was andere sagen.",
-      "Lebe dein Leben wie du willst und höre nicht auf andere.",
-      "Liebe ist stärker, als du denkst.",
-      "Bleib so wie du bist.",
-      "Gott behütet dich.",
-      "Liebe muss nicht stark sein, sie muss echt sein.",
-      "Ändere dich für niemanden.",
+      "Geduld ist auch eine Stärke.",
+      "Du darfst deinen eigenen Weg gehen.",
+      "Lebe deine Träume.",
+      "Mach dein Ding.",
+      "Alles kommt zur richtigen Zeit.",
+      "Bleib wie du bist.",
+      "Du bist wichtig.",
       "Viel Glück.",
-      "Momente welken wie Blumen, aber echte Erinnerungen bleiben.",
-      "Schön, dass es dich gibt.",
-      "Du bist ein ganz besonderer Mensch.",
-      "Du findest immer ein Licht, wenn du im Dunkeln bist."
+      "Du findest immer einen Weg.",
+      "Heute kann dein Tag sein."
     ];
 
-    const spruchElement = document.getElementById("spruch");
-    const button = document.getElementById("button");
-
     function neuerSpruch() {
-
-      // Fade-Out
-      spruchElement.classList.remove("show");
-
-      setTimeout(() => {
-
-        const zufall =
-          Math.floor(Math.random() * sprueche.length);
-
-        spruchElement.textContent = sprueche[zufall];
-
-        // Fade-In
-        spruchElement.classList.add("show");
-
-      }, 200);
+      const zufall = Math.floor(Math.random() * sprueche.length);
+      document.getElementById("spruch").textContent = sprueche[zufall];
     }
 
-    // Klick auf Button
-    button.addEventListener("click", neuerSpruch);
-
-    // Erster Spruch beim Laden
+    // direkt beim Laden ersten Spruch zeigen
     neuerSpruch();
   </script>
 
