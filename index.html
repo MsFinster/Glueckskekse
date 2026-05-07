@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>🍪 Dein Glückskeks</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍪 Glückskeks</title>
 
   <style>
-    /* Grundlayout */
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background: linear-gradient(135deg, #fff8e7, #ffeac0);
+      background: linear-gradient(135deg, #fff4d6, #ffe3a3);
       overflow: hidden;
     }
 
-    /* Glückskeks-Karte */
+    .container {
+      text-align: center;
+    }
+
     .card {
       width: 340px;
       height: 340px;
-      background: #fff7e6;
+      background: #fffaf0;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 2rem;
-      box-sizing: border-box;
-      text-align: center;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
     }
@@ -40,36 +45,31 @@
     }
 
     h1 {
-      margin: 0 0 1rem;
       color: #d18b3f;
+      margin-bottom: 1rem;
       font-size: 2rem;
     }
 
-    p {
+    #spruch {
       color: #6b4c2f;
       font-size: 1.15rem;
-      line-height: 1.5;
-      min-height: 90px;
+      line-height: 1.6;
+      min-height: 110px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.4s ease;
-      padding: 0 1rem;
-    }
-
-    /* Fade Animation */
-    .fade {
       opacity: 0;
+      transition: opacity 0.4s ease;
+      padding: 0 10px;
     }
 
-    .fade.show {
+    #spruch.show {
       opacity: 1;
     }
 
-    /* Button */
     button {
-      margin-top: 1rem;
-      padding: 0.85rem 1.6rem;
+      margin-top: 1.5rem;
+      padding: 0.9rem 1.7rem;
       border: none;
       border-radius: 999px;
       background: #f7c873;
@@ -82,7 +82,7 @@
     }
 
     button:hover {
-      background: #ffd68a;
+      background: #ffd98f;
       transform: translateY(-2px);
     }
 
@@ -90,8 +90,7 @@
       transform: scale(0.97);
     }
 
-    /* Responsive */
-    @media (max-width: 420px) {
+    @media (max-width: 450px) {
       .card {
         width: 90vw;
         height: 90vw;
@@ -101,7 +100,7 @@
         font-size: 1.7rem;
       }
 
-      p {
+      #spruch {
         font-size: 1rem;
       }
     }
@@ -110,14 +109,16 @@
 
 <body>
 
-  <div class="card">
-    <h1>🍪 Glückskeks</h1>
+  <div class="container">
+    <div class="card">
+      <h1>🍪 Glückskeks</h1>
 
-    <p id="spruch" class="fade"></p>
+      <p id="spruch"></p>
 
-    <button onclick="neuerSpruch()">
-      Neuen Spruch
-    </button>
+      <button id="button">
+        Neuer Spruch
+      </button>
+    </div>
   </div>
 
   <script>
@@ -135,37 +136,44 @@
       "Lebe deine Träume weiter.",
       "Mach das, was du machen willst und nicht was andere sagen.",
       "Lebe dein Leben wie du willst und höre nicht auf andere.",
-      "Liebe ist stärker, als du denkst – mach deshalb, was dir gefällt.",
+      "Liebe ist stärker, als du denkst.",
       "Bleib so wie du bist.",
       "Gott behütet dich.",
       "Liebe muss nicht stark sein, sie muss echt sein.",
       "Ändere dich für niemanden.",
       "Viel Glück.",
-      "Momente welken wie Blumen, aber unsere halten für ewig.",
+      "Momente welken wie Blumen, aber echte Erinnerungen bleiben.",
       "Schön, dass es dich gibt.",
-      "Du bist ein ganz besonderer Jahrgang.",
+      "Du bist ein ganz besonderer Mensch.",
       "Du findest immer ein Licht, wenn du im Dunkeln bist."
     ];
 
-    function neuerSpruch() {
-      const spruchElem = document.getElementById("spruch");
+    const spruchElement = document.getElementById("spruch");
+    const button = document.getElementById("button");
 
-      // Ausblenden
-      spruchElem.classList.remove("show");
+    function neuerSpruch() {
+
+      // Fade-Out
+      spruchElement.classList.remove("show");
 
       setTimeout(() => {
+
         const zufall =
           Math.floor(Math.random() * sprueche.length);
 
-        spruchElem.textContent = sprueche[zufall];
+        spruchElement.textContent = sprueche[zufall];
 
-        // Einblenden
-        spruchElem.classList.add("show");
+        // Fade-In
+        spruchElement.classList.add("show");
+
       }, 200);
     }
 
-    // Beim Laden direkt anzeigen
-    window.onload = neuerSpruch;
+    // Klick auf Button
+    button.addEventListener("click", neuerSpruch);
+
+    // Erster Spruch beim Laden
+    neuerSpruch();
   </script>
 
 </body>
