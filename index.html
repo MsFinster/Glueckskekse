@@ -4,68 +4,81 @@
   <meta charset="UTF-8">
   <title>🍪 Dein Glückskeks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     /* Grundlayout */
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #fff8e7, #ffeac0);
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-      transition: background 0.5s ease;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #ffeac0);
+      overflow: hidden;
     }
 
     /* Glückskeks-Karte */
     .card {
+      width: 340px;
+      height: 340px;
       background: #fff7e6;
-      padding: 2.5rem;
       border-radius: 50%;
-      width: 320px;
-      height: 320px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      padding: 2rem;
+      box-sizing: border-box;
       text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
     }
 
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem;
       color: #d18b3f;
+      font-size: 2rem;
     }
 
     p {
-      font-size: 1.2rem;
-      line-height: 1.5;
       color: #6b4c2f;
-      min-height: 3em;
+      font-size: 1.15rem;
+      line-height: 1.5;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease;
       padding: 0 1rem;
-      transition: opacity 0.3s ease;
+    }
+
+    /* Fade Animation */
+    .fade {
+      opacity: 0;
+    }
+
+    .fade.show {
+      opacity: 1;
     }
 
     /* Button */
     button {
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.5rem;
+      margin-top: 1rem;
+      padding: 0.85rem 1.6rem;
       border: none;
       border-radius: 999px;
-      font-size: 1rem;
-      cursor: pointer;
       background: #f7c873;
       color: #6b4c2f;
+      font-size: 1rem;
       font-weight: bold;
+      cursor: pointer;
+      transition: all 0.25s ease;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: all 0.2s ease;
     }
 
     button:hover {
@@ -73,68 +86,87 @@
       transform: translateY(-2px);
     }
 
-    /* Animation beim Spruchwechsel */
-    .fade {
-      opacity: 0;
-      transition: opacity 0.4s ease;
+    button:active {
+      transform: scale(0.97);
     }
 
-    .fade.show {
-      opacity: 1;
+    /* Responsive */
+    @media (max-width: 420px) {
+      .card {
+        width: 90vw;
+        height: 90vw;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<div class="card">
-  <h1>🍪 Glückskeks</h1>
-  <p id="spruch" class="fade"></p>
-  <button onclick="neuerSpruch()">Neuen Spruch</button>
-</div>
+  <div class="card">
+    <h1>🍪 Glückskeks</h1>
 
-<script>
-  const sprueche = [
-    "Manchmal ist der Umweg der schönste Weg.",
-    "Deine Neugier wird dich weiter bringen als jeder Plan.",
-    "Heute ist ein guter Tag, etwas Neues zu beginnen.",
-    "Vertraue dem Prozess – auch wenn du ihn noch nicht verstehst.",
-    "Deine Kreativität ist wertvoller als du denkst.",
-    "Ein kleiner Schritt heute kann morgen alles verändern.",
-    "Du bist näher dran, als es sich gerade anfühlt.",
-    "Das, was dich begeistert, ist kein Zufall.",
-    "Geduld ist auch eine Form von Mut.",
-    "Du darfst deinen eigenen Rhythmus haben."
-     "Lebe deine Traum weiter."
-  "Mach das, was du machen willst und nicht was andere sagen."
-  "Lebe dein Leben wie du willst und höre nicht auf andere."
-  "Liebe ist stärker, als du denkst, deswegen mach was dir gefällt."
-  "Bleib so wie du bist."
-  "Gott behütet dich."
-  "Liebe muss nicht stark sein, sie muss echt sein."
-  "Ändere dich für niemand."
-  "Viel Glück."
-  "Momente welken wie Blumen, aber unsere halten für ewig."
-  "Schön, dass es dich gibt."
-  "Du bist ein ganz besonderer Jahrgang."
-  "Du findest immer ein Licht, wenn du im Dunkeln bist."
-  
-  ];
+    <p id="spruch" class="fade"></p>
 
-  function neuerSpruch() {
-    const spruchElem = document.getElementById("spruch");
-    spruchElem.classList.remove("show");
+    <button onclick="neuerSpruch()">
+      Neuen Spruch
+    </button>
+  </div>
 
-    setTimeout(() => {
-      const zufall = Math.floor(Math.random() * sprueche.length);
-      spruchElem.textContent = sprueche[zufall];
-      spruchElem.classList.add("show");
-    }, 200);
-  }
+  <script>
+    const sprueche = [
+      "Manchmal ist der Umweg der schönste Weg.",
+      "Deine Neugier wird dich weiter bringen als jeder Plan.",
+      "Heute ist ein guter Tag, etwas Neues zu beginnen.",
+      "Vertraue dem Prozess – auch wenn du ihn noch nicht verstehst.",
+      "Deine Kreativität ist wertvoller als du denkst.",
+      "Ein kleiner Schritt heute kann morgen alles verändern.",
+      "Du bist näher dran, als es sich gerade anfühlt.",
+      "Das, was dich begeistert, ist kein Zufall.",
+      "Geduld ist auch eine Form von Mut.",
+      "Du darfst deinen eigenen Rhythmus haben.",
+      "Lebe deine Träume weiter.",
+      "Mach das, was du machen willst und nicht was andere sagen.",
+      "Lebe dein Leben wie du willst und höre nicht auf andere.",
+      "Liebe ist stärker, als du denkst – mach deshalb, was dir gefällt.",
+      "Bleib so wie du bist.",
+      "Gott behütet dich.",
+      "Liebe muss nicht stark sein, sie muss echt sein.",
+      "Ändere dich für niemanden.",
+      "Viel Glück.",
+      "Momente welken wie Blumen, aber unsere halten für ewig.",
+      "Schön, dass es dich gibt.",
+      "Du bist ein ganz besonderer Jahrgang.",
+      "Du findest immer ein Licht, wenn du im Dunkeln bist."
+    ];
 
-  // Direkt beim Laden einen Spruch anzeigen
-  neuerSpruch();
-</script>
+    function neuerSpruch() {
+      const spruchElem = document.getElementById("spruch");
+
+      // Ausblenden
+      spruchElem.classList.remove("show");
+
+      setTimeout(() => {
+        const zufall =
+          Math.floor(Math.random() * sprueche.length);
+
+        spruchElem.textContent = sprueche[zufall];
+
+        // Einblenden
+        spruchElem.classList.add("show");
+      }, 200);
+    }
+
+    // Beim Laden direkt anzeigen
+    window.onload = neuerSpruch;
+  </script>
 
 </body>
 </html>
-
